@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Greetings and Time</title>
+</head>
+<body>
+    <div class="container">
+        <div id="greeting">
+            <p id="greeting-message">Hello Teachers! 👩‍🏫👨‍🏫</p>
+        </div>
+        <div id="input-section">
+            <div class="input-row">
+                <p class="inline-label">What time of the day is it?</p>
+                <select id="time-options">
+                    <option value="choose">Choose</option>
+                    <option value="am">Morning</option>
+                    <option value="pm12">Noon</option>
+                    <option value="pm6">Evening</option>
+                </select>
+            </div>
+        </div>
+        <button id="submit-button">Submit</button>
+        <p id="warning-message" style="color: red;"></p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const timeOptions = document.getElementById("time-options");
+            const submitButton = document.getElementById("submit-button");
+            const warningMessage = document.getElementById("warning-message");
+
+            // Set initial greeting
+            const greetingMessage = document.getElementById("greeting-message");
+            greetingMessage.textContent = "Hello Teachers! 👩‍🏫👨‍🏫";
+
+            // Handle the Submit button
+            submitButton.addEventListener("click", function (event) {
+                const selectedTime = timeOptions.value;
+
+                if (selectedTime === "choose") {
+                    // Prevent the form from submitting
+                    event.preventDefault();
+
+                    // Display a warning message
+                    warningMessage.textContent = "Please choose an option";
+                } else {
+                    // Clear any existing warning message
+                    warningMessage.textContent = "";
+
+                    // Get selected time and redirect only if a valid option is chosen
+                    const selectedTime = document.getElementById("time-options").value;
+
+                    // Redirect to the output page with selected time as a parameter
+                    window.location.href = `output_page.html?time=${selectedTime}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

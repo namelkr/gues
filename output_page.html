@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Output</title>
+</head>
+<body>
+    <div class="container">
+        <div id="output-section">
+            <p id="output-message"></p>
+        </div>
+        <div class="input-row">
+            <p class="inline-label centered-label">Date (dd/mm/yyyy)</p>
+            <!-- Replace the date input with a text input -->
+            <input type="text" id="date-input" placeholder="dd/mm/yyyy">
+        </div>
+        <button id="submit-button">Submit</button> <!-- Move the submit button here -->
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedTime = urlParams.get("time");
+            const dateInput = document.getElementById("date-input");
+
+            let outputMessage = "";
+
+            if (selectedTime === "am") {
+                outputMessage = "Good morning ☀️";
+            } else if (selectedTime === "pm12") {
+                outputMessage = "Good afternoon 🌤️";
+            } else if (selectedTime === "pm6") {
+                outputMessage = "Good evening 🌇";
+            } else {
+                outputMessage = "Invalid time selection";
+            }
+
+            // Display the output message for the selected time
+            document.getElementById("output-message").textContent = outputMessage;
+
+            // Add an event listener for the submit button
+            const submitButton = document.getElementById("submit-button");
+            submitButton.addEventListener("click", function () {
+                const selectedDate = dateInput.value; // Get the date from the text input
+
+                // Check if the selected date is "05/09/2023" (case-sensitive comparison)
+                if (selectedDate === "05/09/2023") {
+                    // Redirect to the 'wish.html' page
+                    window.location.href = "wish.html";
+                } else {
+                    // Redirect to the 'not5.html' page
+                    window.location.href = "not5.html?time=" + selectedTime;
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
